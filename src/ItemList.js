@@ -1,21 +1,19 @@
 import React from 'react';
 import Item from './Item';
-import { saveToLocalStorage } from './helpers/localStorageUtils';
 
-const ItemList = ({ items, setItems }) => {
+const ItemList = ({ items, setItems, setAndSaveItems }) => {
   const handleCheck = id => {
     const updatedItems = items.map(item =>
       item.id === id ? { ...item, checked: !item.checked } : item
     );
 
-    setItems(updatedItems);
-    saveToLocalStorage(updatedItems, 'shoppingList');
+    setAndSaveItems(updatedItems, 'shoppingList');
   };
 
   const handleDelete = id => {
     const filteredList = items.filter(item => item.id !== id);
-    setItems(filteredList);
-    saveToLocalStorage(filteredList, 'shoppingList');
+
+    setAndSaveItems(filteredList, 'shoppingList');
   };
 
   return (
