@@ -1,35 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { FaTrashAlt } from 'react-icons/fa';
+import { saveToLocalStorage } from './helpers/localStorageUtils';
 
-const Content = () => {
-  // helpers
-  const saveToLocalStorage = (data, location) => {
-    localStorage.setItem(location, JSON.stringify(data));
-  };
-  const loadFromLocalStorage = data => {
-    return JSON.parse(localStorage.getItem(data));
-  };
-
-  const defaultList = [
-    {
-      id: 1,
-      checked: true,
-      item: 'One half pound bag of Cocoa',
-    },
-    {
-      id: 2,
-      checked: false,
-      item: 'item 2',
-    },
-    {
-      id: 3,
-      checked: false,
-      item: 'Item 3',
-    },
-  ];
-  const savedList = loadFromLocalStorage('shoppingList');
-  const [items, setItems] = useState(savedList || defaultList);
-
+const Content = ({ items, setItems }) => {
   const handleCheck = id => {
     const updatedItems = items.map(item =>
       item.id === id ? { ...item, checked: !item.checked } : item
