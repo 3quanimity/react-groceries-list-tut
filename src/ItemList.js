@@ -1,7 +1,7 @@
 import React from 'react';
 import Item from './Item';
 
-const ItemList = ({ items, setItems, setAndSaveItems }) => {
+const ItemList = ({ items, setAndSaveItems, search }) => {
   const handleCheck = id => {
     const updatedItems = items.map(item =>
       item.id === id ? { ...item, checked: !item.checked } : item
@@ -16,11 +16,15 @@ const ItemList = ({ items, setItems, setAndSaveItems }) => {
     setAndSaveItems(filteredList, 'shoppingList');
   };
 
+  const filteredItems = items.filter(element =>
+    element.item.toLowerCase().includes(search.toLowerCase())
+  );
+
   return (
     <>
       {items.length ? (
         <ul>
-          {items.map(item => (
+          {filteredItems.map(item => (
             <Item
               item={item}
               handleCheck={handleCheck}

@@ -7,6 +7,7 @@ import {
   loadFromLocalStorage,
   saveToLocalStorage,
 } from './helpers/localStorageUtils';
+import SearchItem from './SearchItem';
 
 function App() {
   const defaultList = [
@@ -27,9 +28,10 @@ function App() {
     },
   ];
   const savedList = loadFromLocalStorage('shoppingList');
-  const [items, setItems] = useState(savedList || defaultList);
 
+  const [items, setItems] = useState(savedList || defaultList);
   const [newItem, setNewItem] = useState('');
+  const [search, setSearch] = useState('');
 
   const setAndSaveItems = (itemsToSave, localStorageLocation) => {
     setItems(itemsToSave);
@@ -39,13 +41,18 @@ function App() {
   return (
     <div className="App">
       <Header title="Groceries List" />
+      <SearchItem search={search} setSearch={setSearch} />
+      <Content
+        items={items}
+        setAndSaveItems={setAndSaveItems}
+        search={search}
+      />
       <AddItem
         newItem={newItem}
         setNewItem={setNewItem}
         items={items}
         setAndSaveItems={setAndSaveItems}
       />
-      <Content items={items} setAndSaveItems={setAndSaveItems} />
       <Footer length={items.length} />
     </div>
   );

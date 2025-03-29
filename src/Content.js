@@ -1,10 +1,14 @@
 import React from 'react';
 import ItemList from './ItemList';
 
-const Content = ({ items, setAndSaveItems }) => {
+const Content = ({ items, setAndSaveItems, search }) => {
   return (
     <main>
-      <ItemList items={items} setAndSaveItems={setAndSaveItems} />
+      <ItemList
+        items={items}
+        setAndSaveItems={setAndSaveItems}
+        search={search}
+      />
     </main>
   );
 };
